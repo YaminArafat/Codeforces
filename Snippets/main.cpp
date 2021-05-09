@@ -28,9 +28,9 @@ typedef vector<vl> vvl;
 int main()
 {
     fio;
-    #ifndef ONLINE_JUDGE 
-        rw;
-    #endif
+    // #ifndef ONLINE_JUDGE 
+    //     rw;
+    // #endif
     
     return 0;
 }
