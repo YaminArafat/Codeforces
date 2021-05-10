@@ -31,8 +31,44 @@ int main()
     // #ifndef ONLINE_JUDGE s
     //     rw;
     // #endif
-    int n,k;
+    ll n,k,minn,maxx;
     cin>>n>>k;
-    
+    if (k==1 && n>2)
+    {
+        minn=1;
+        maxx=2;
+    }
+    else if (k==1)
+    {
+        if (n==2)
+        {
+            minn=1;
+            maxx=1;
+        }
+        else
+        {
+            minn=0;
+            maxx=0;
+        }
+    }
+    else if (k==0 || k== n)
+    {
+        minn=0;
+        maxx=0;
+    }
+    else
+    {
+        minn=1;
+        maxx=n-k;
+        // if(n>6 && k==2)
+        // {
+        //     maxx=4;
+        // }
+    }
+    if(n>3*k)
+    {
+        maxx=2*k;
+    }
+    cout<<minn<<" "<<maxx<<endl;
     return 0;
 }

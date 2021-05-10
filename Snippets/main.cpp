@@ -4,9 +4,12 @@ using namespace std;
 #define for0(i, n, incr) for (int i = 0; i < (int)(n); i+=incr) // 0 based indexing
 #define for1(i, n, incr) for (int i = 1; i <= (int)(n); i+=incr) // 1 based indexing
 #define forc(i, l, r, incr) for (int i = (int)(l); i <= (int)(r); i+=incr) // closed intervel from l to r inclusive
+#define forcr(i, r, l, decr) for (int i = (int)(r); i >= (int)(l); i-=decr) // closed intervel from r to l inclusive
 #define forr0(i, n, decr) for (int i = (int)(n) - 1; i >= 0; i-=decr) // reverse 0 based
 #define forr1(i, n, decr) for (int i = (int)(n); i >= 1; i-=decr) // reverse 1 based
 #define see(x) cout<<"\n"<<#x<<" = "<<(x)<<"\n";
+#define see2(x,y) cout<<"\n"<<#x<<" = "<<(x)<<" "<<#y<<" = "<<(y)<<'\n'
+#define see3(x,y,z) cout<<"\n"<<#x<<" = "<<(x)<<" "<<#y<<" = "<<(y)<<" "<<#z<<" = "<<(z)<<'\n'
 #define pb push_back
 #define mk make_pair
 #define ff first
