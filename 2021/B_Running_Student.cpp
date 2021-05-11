@@ -10,6 +10,7 @@ using namespace std;
 #define see(x) cout<<"\n"<<#x<<" = "<<(x)<<"\n";
 #define see2(x,y) cout<<"\n"<<#x<<" = "<<(x)<<" "<<#y<<" = "<<(y)<<'\n'
 #define see3(x,y,z) cout<<"\n"<<#x<<" = "<<(x)<<" "<<#y<<" = "<<(y)<<" "<<#z<<" = "<<(z)<<'\n'
+#define clr(a,b) memset(a,b,sizeof(a))
 #define pb push_back
 #define mk make_pair
 #define ff first
@@ -34,74 +35,51 @@ int main()
     // #ifndef ONLINE_JUDGE 
     //     rw;
     // #endif
-    ll n,d,m,l,s,x,y,k=0,N,low,high,factor,ans;
-    cin>>n>>d>>m>>l;
-    vpl range;
+    int n,vb,vs,xu,yu,ans;
+    double mint=1000000.0,mind=1000000.0,distb,dists,rtimeb,rtimes,time;
+    cin>>n>>vb>>vs;
+    int stops[n+5];
     for0(i,n,1)
     {
-        x=i*m;
-        y=i*m+l;
-        range.pb(mk(x,y));
+        cin>>stops[i];
     }
-    ans=y/d;
-    ans++;
-    ans=ans*d;
-    for0(i,n-1,1)
+    //ans=n;
+    cin>>xu>>yu;
+    for1(i,n-1,1)
     {
-        low=range[i].ss;
-        high=range[i+1].ff;
-        factor=low/d;
-        factor*=d;
-        //see3(low,high,factor);
-        if(factor>low && factor<high)
+        //see(i);
+        distb=(double)stops[i];
+        rtimeb=distb/vb;
+        dists=(double)(xu-stops[i])*(xu-stops[i])+yu*yu;
+        dists=sqrt(dists);
+        rtimes=(dists/vs);
+        time=rtimeb+rtimes;
+        if(time<mint)
         {
-            ans=factor;
-            break;
+            mint=time;
+            mind=dists;
+            ans=i+1;
         }
-        else if(factor+d>low && factor+d<high)
+        else if(time==mint)
         {
-            ans=factor+d;
-            break;
+            if(dists<mind)
+            {
+                mind=dists;
+                ans=i+1;
+            }
         }
+        // if(xu>=stops[i] && stops[i+1]>=xu)
+        // {
+        //     if(xu-stops[i]<=stops[i+1]-xu)
+        //     {
+        //         ans=i+1;
+        //     }
+        //     else
+        //         ans=i+2;
+        // }
     }
+    // if(xu<=0)
+    //     ans=2;
     cout<<ans<<endl;
-    // vi indx;
-    // N=(n-1)*m+l+1;
-    // for0(i,N,1)
-    // {
-    //     indx.pb(1);
-    // }
-    // for0(i,N,1)
-    // {
-    //     x=k*m;
-    //     y=k*m+l;
-    //     if(i>=x && i<y)
-    //     {
-    //         indx[i]=-1;
-    //     }
-    //     else if(i>=x && i==y)
-    //     {
-    //         indx[i]=-1;
-    //         k++;
-    //         i=k*m;
-    //         i--;
-    //     }
-    // }
-    // // for0(i,N,1)
-    // // {
-    // //     see(indx[i]);
-    // // }
-    // for0(i,N,1)
-    // {
-    //     if(indx[i]==-1)
-    //     {
-    //         continue;
-    //     }
-    //     if(i%d==0)
-    //     {
-    //         cout<<i<<endl;
-    //         break;
-    //     }
-    // }
     return 0;
 }
