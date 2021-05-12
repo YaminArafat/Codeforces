@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define for0(i, n, incr) for (int i = 0; i < (int)(n); i+=incr) // 0 based indexing
-#define for1(i, n, incr) for (int i = 1; i <= (int)(n); i+=incr) // 1 based indexing
-#define forc(i, l, r, incr) for (int i = (int)(l); i <= (int)(r); i+=incr) // closed intervel from l to r inclusive
-#define forcr(i, r, l, decr) for (int i = (int)(r); i >= (int)(l); i-=decr) // closed intervel from r to l inclusive
-#define forr0(i, n, decr) for (int i = (int)(n) - 1; i >= 0; i-=decr) // reverse 0 based
-#define forr1(i, n, decr) for (int i = (int)(n); i >= 1; i-=decr) // reverse 1 based
+#define for0(i, n, incr) for (int i = 0; i < (int)(n); i+=incr) 
+#define for1(i, n, incr) for (int i = 1; i <= (int)(n); i+=incr) 
+#define forc(i, l, r, incr) for (int i = (int)(l); i <= (int)(r); i+=incr) 
+#define forcr(i, r, l, decr) for (int i = (int)(r); i >= (int)(l); i-=decr)
+#define forr0(i, n, decr) for (int i = (int)(n) - 1; i >= 0; i-=decr)
+#define forr1(i, n, decr) for (int i = (int)(n); i >= 1; i-=decr) 
 #define see(x) cout<<"\n"<<#x<<" = "<<(x)<<"\n";
 #define see2(x,y) cout<<"\n"<<#x<<" = "<<(x)<<" "<<#y<<" = "<<(y)<<'\n'
 #define see3(x,y,z) cout<<"\n"<<#x<<" = "<<(x)<<" "<<#y<<" = "<<(y)<<" "<<#z<<" = "<<(z)<<'\n'
@@ -15,8 +15,8 @@ using namespace std;
 #define mk make_pair
 #define ff first
 #define ss second
-#define all(x) (x).begin(), (x).end() //Forward traversal
-#define rall(x) (x).rbegin, (x).rend() //reverse traversal
+#define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin, (x).rend()
 #define tr(it, x) for(auto it = x.begin(); it != x.end(); it++)
 #define trr(it, x) for(auto it = x.rbegin(); it != x.rend(); it+)
 #define fio ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -35,6 +35,20 @@ int main()
     // #ifndef ONLINE_JUDGE 
     //     rw;
     // #endif
-    
+    double a1,b1,c1,a2,b2,c2;
+    cin>>a1>>b1>>c1>>a2>>b2>>c2;
+    // a1=a1/a2;
+    // b1=b1/b2;
+    //see2(a1,b1);
+    if(!a1 && !b1 && c1)
+        cout<<"0"<<endl;
+    else if(!a2 && !b2 && c2)
+        cout<<"0"<<endl;
+    else if(a1*b2==b1*a2 && b1*c2==b2*c1 && c1*a2==c2*a1)
+        cout<<"-1"<<endl;
+    else if(a1*b2==b1*a2)
+        cout<<"0"<<endl;
+    else
+        cout<<"1"<<endl;
     return 0;
 }
