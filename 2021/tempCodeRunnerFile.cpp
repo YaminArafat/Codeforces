@@ -1,3 +1,2 @@
-#ifndef ONLINE_JUDGE 
-    //     rw;
-    // #endif
+if(vec[i][j])
+            continue;
