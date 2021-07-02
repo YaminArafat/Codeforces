@@ -1,0 +1,214 @@
+#include <bits/stdc++.h>
+using namespace std;
+//bool flag[105];
+int main()
+{
+    int n,hh,mm,dif,mx=0,temp1,temp2;
+    pair<int,int>py;
+    vector<pair<int,int> >vec;
+    scanf("%d",&n);
+    for(int i=0; i<n; i++)
+    {
+        scanf("%d:%d",&hh,&mm);
+        py.first=hh;
+        py.second=mm;
+        vec.push_back(py);
+    }
+    if(n>1)
+    {
+        sort(vec.begin(),vec.end());
+        /*for(int i=0; i<n-1; i++)
+        {
+            cout<<vec[i].first<<":"<<vec[i].second<<endl;
+        }*/
+        int tempmm=0,temphh=0;
+        for(int i=0; i<n-1; i++)
+        {
+            //flag[vec[i].first]=1;
+            if(vec[i].second+1<=vec[i+1].second)
+            {
+                tempmm=vec[i+1].second-vec[i].second-1;
+                temphh=vec[i+1].first-vec[i].first;
+            }
+            else
+            {
+                tempmm=vec[i+1].second+60-vec[i].second-1;
+                temphh=vec[i+1].first-vec[i].first-1;
+            }
+            dif=(temphh*60)+tempmm;
+            //cout<<temphh<<":"<<tempmm<<" "<<dif<<endl;
+            if(dif>mx)
+            {
+                temp1=temphh;
+                temp2=tempmm;
+                mx=dif;
+            }
+        }
+        if(vec[n-1].first>=12&& vec[0].first>=12)
+        {
+            vec[n-1].first-=12;
+            vec[0].first+=12;
+            if(vec[n-1].second+1<=vec[0].second)
+            {
+                tempmm=vec[0].second-vec[n-1].second-1;
+                temphh=vec[0].first-vec[n-1].first;
+            }
+            else
+            {
+                tempmm=vec[0].second+60-vec[n-1].second-1;
+                temphh=vec[0].first-vec[n-1].first-1;
+            }
+        }
+        else if (vec[n-1].first<12&& vec[0].first<12)
+        {
+            vec[0].first+=24;
+            if(vec[n-1].second+1<=vec[0].second)
+            {
+                tempmm=vec[0].second-vec[n-1].second-1;
+                temphh=vec[0].first-vec[n-1].first;
+            }
+            else
+            {
+                tempmm=vec[0].second+60-vec[n-1].second-1;
+                temphh=vec[0].first-vec[n-1].first-1;
+            }
+        }
+        dif=(temphh*60)+tempmm;
+        //cout<<temphh<<":"<<tempmm<<" "<<dif<<endl;
+        if(dif>mx)
+        {
+            temp1=temphh;
+            temp2=tempmm;
+            mx=dif;
+        }
+    }
+    else
+    {
+        temp1=23;
+        temp2=59;
+    }
+    if(temp1<10)
+    {
+        cout<<"0";
+    }
+    cout<<temp1<<":";
+    if(temp2==0)
+    {
+        cout<<"0";
+    }
+    cout<<temp2<<endl;
+    return 0;
+}
+/*temphh=24-(vec[n-1].first-vec[0].first);
+        if(vec[n-1].first==vec[0].first)
+        {
+            temphh--;
+        }
+        tempmm=60-vec[n-1].second-1+vec[0].second;
+        if(tempmm>=60)
+        {
+            tempmm-=60;
+        }
+
+
+        99
+08:11
+08:12
+08:13
+08:14
+08:15
+08:16
+08:17
+08:18
+08:19
+08:20
+08:21
+08:22
+08:23
+08:24
+08:25
+08:26
+08:27
+08:28
+08:29
+08:30
+08:31
+08:32
+08:33
+08:34
+08:35
+08:36
+08:37
+08:38
+08:39
+08:40
+08:41
+08:42
+08:43
+08:44
+08:45
+08:46
+08:47
+08:48
+08:49
+08:50
+08:51
+08:52
+08:53
+08:54
+08:55
+08:56
+08:57
+08:58
+08:59
+09:00
+09:01
+09:02
+09:03
+09:04
+09:05
+09:06
+09:07
+09:08
+09:09
+09:10
+09:11
+09:12
+09:13
+09:14
+09:15
+09:16
+09:17
+09:18
+09:19
+09:20
+09:21
+09:22
+09:23
+09:24
+09:25
+09:26
+09:27
+09:28
+09:29
+09:30
+09:31
+09:32
+09:33
+09:34
+09:35
+09:36
+09:37
+09:38
+09:39
+09:40
+09:41
+09:42
+09:43
+09:44
+09:45
+09:46
+09:47
+09:48
+09:49
+        */
