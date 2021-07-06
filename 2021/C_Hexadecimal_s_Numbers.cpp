@@ -32,25 +32,41 @@ typedef vector<vl> vvl;
 int main()
 {
     fio;
-    // #ifndef ONLINE_JUDGE 
-    //     rw;
-    // #endif
-    ll n,ans=0;
+    #ifndef ONLINE_JUDGE 
+        rw;
+    #endif
+    ll n;
     cin>>n;
-    ll arr[n+5],sum[n+5];
-    clr(sum,0);
-    for0(i,n,1)
+    vl vec;
+    queue<ll>q;
+    vec.pb(1);
+    q.push(1);
+    while (1)
     {
-        cin>>arr[i];
-        sum[i+1]=sum[i]+arr[i];
+        ll front=q.front();
+        q.pop();
+        ll x = front*10*1LL;
+        ll y = x + 1;
+    
+        vec.pb(x);
+        vec.pb(y);
+        if(x>=n*1LL)
+            break;
+        q.push(x);
+        q.push(y);
     }
-    for1(i,n-1,1)
+    for0(i,vec.size(),1)
     {
-        if(sum[i]==(sum[n]-sum[i]))
+        if(n==vec[i])
         {
-            ans++;
+            cout<<i+1<<endl;
+            return 0;
+        }
+        else if(vec[i]>n)
+        {
+            cout<<i<<endl;
+            return 0;
         }
     }
-    cout<<ans<<endl;
     return 0;
 }

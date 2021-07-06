@@ -32,25 +32,55 @@ typedef vector<vl> vvl;
 int main()
 {
     fio;
-    // #ifndef ONLINE_JUDGE 
+    // #ifndef ONLINE_JUDGE
     //     rw;
     // #endif
-    ll n,ans=0;
-    cin>>n;
-    ll arr[n+5],sum[n+5];
-    clr(sum,0);
-    for0(i,n,1)
+    string inp, ans = "";
+    cin >> inp;
+    set<int> s;
+    for (int i = inp.size() - 1; i >= 0; i--)
     {
-        cin>>arr[i];
-        sum[i+1]=sum[i]+arr[i];
-    }
-    for1(i,n-1,1)
-    {
-        if(sum[i]==(sum[n]-sum[i]))
+        int j = 1, x = 0;
+        while (i >= 0 && inp[i] != ',')
         {
-            ans++;
+            int y = inp[i] - '0';
+            x += (y * j);
+            j *= 10;
+            i--;
+        }
+        s.insert(x);
+        //cout<<x<<endl;
+    }
+    set<int>::iterator it;
+    vi vec;
+    int curr = 0;
+    for (it = s.begin(); it != s.end(); it++)
+    {
+        //cout << *it << " ";
+        vec.pb(*it);
+    }
+    cout << vec[0];
+    for1(i, vec.size() - 1, 1)
+    {
+        //cout<<vec[i]<<" ";
+        if (vec[i] - vec[i - 1] == 1)
+        {
+            curr++;
+        }
+        else if (vec[i] - vec[i - 1] > 1)
+        {
+            if (curr)
+            {
+                cout << "-" << vec[i - 1] << "," << vec[i];
+                curr = 0;
+            }
+            else
+                cout << "," << vec[i];
         }
     }
-    cout<<ans<<endl;
+    if(curr)
+    {
+        cout << "-" << vec[vec.size() - 1]<<endl;
+    }
     return 0;
 }
