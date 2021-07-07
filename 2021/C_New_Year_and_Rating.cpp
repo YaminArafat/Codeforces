@@ -29,83 +29,80 @@ typedef vector<pii> vpii;
 typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
-vector<long double> vecA, vecB;
-long double n, p, diff;
-bool isValidMid(long double time)
+int n, start, curDiv, curRating;
+int chng[2000005], divison[2000005];
+int isValidMid(int rating)
 {
-    long double totPower = p * time, needPower;
     for0(i, n, 1)
     {
-        needPower = vecA[i] * time;
-        if (needPower > vecB[i])
+        if (rating >= 1900)
         {
-            diff = needPower - vecB[i];
-            if (diff > totPower)
-                return false;
-            totPower -= diff;
-        }
-    }
-    return true;
-}
-
-void bSrch()
-{
-    long double low = 0.0, high = 10e9, mid;
-    while (fabs(high - low) >= 1e-4)
-    {
-        mid = (low + high) / 2.0;
-        if (isValidMid(mid))
-        {
-            low = mid;
+            if (divison[i] == 2)
+                return -1;
         }
         else
         {
-            high = mid;
+            if (divison[i] == 1)
+            {
+                return 1;
+            }
         }
+        rating += chng[i];
     }
-    cout << fixed << setprecision(10) << low << endl;
+    return 0;
+}
+int bSrch()
+{
+    int ans = -199998101, low = -199998101, high = 200001900, mid, chkMid;
+    mid = (low + high) / 2;
+    //see3(low,mid,high);
+    while (low <= high)
+    {
+        chkMid = isValidMid(mid);
+        //see3(low, mid, high);
+        if (chkMid == -1)
+        {
+            high = mid - 1;
+        }
+        else if (chkMid == 1)
+        {
+            low = mid + 1;
+        }
+        else
+        {
+            low = mid + 1;
+            //see(mid);
+            ans = mid;
+        }
+        mid = (low + high) / 2;
+    }
+    return ans;
 }
 int main()
 {
     fio;
-    #ifndef ONLINE_JUDGE
-        rw;
-    #endif
-    long double a, b, sum = 0, ans, tmpP;
-    cin >> n >> p;
-    //tmpP=p;
+#ifndef ONLINE_JUDGE
+    rw;
+#endif
+    int ans;
+    cin >> n;
+    //see(n);
     for0(i, n, 1)
     {
-        cin >> a >> b;
-        sum += a;
-        vecA.pb(a);
-        vecB.pb(b);
+        cin >> chng[i] >> divison[i];
     }
-    if (p >= sum)
+    ans = bSrch();
+    if (ans == -199998101)
+        cout << "Impossible" << endl;
+    else if (ans == 200001900)
+        cout << "Infinity" << endl;
+    else
     {
-        cout << "-1" << endl;
-        return 0;
+        for0(i, n, 1)
+        {
+            ans += chng[i];
+        }
+        cout << ans << endl;
     }
-    bSrch();
-    // for0(i,n,1)
-    // {
-    //     if(vec[i]!=vec[i+1])
-    //     {
-    //         diff=(vec[i+1]-vec[i])*(i+1);
-    //         if(p>=diff)
-    //         {
-    //             p-=diff;
-    //             ans=vec[i+1];
-    //         }
-    //         else
-    //         {
-    //             ans=vec[i]+p/(i+1);
-    //             break;
-    //         }
-    //     }
-    // }
-    // if(ans>tmpP)
-    //     ans=-1;
-    // cout<<fixed<<setprecision(10)<<ans<<endl;
     return 0;
 }
