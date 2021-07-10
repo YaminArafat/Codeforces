@@ -29,100 +29,81 @@ typedef vector<pii> vpii;
 typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
-ll arr[100005], sum[100005], n;
-int bSrch(int l)
+ll n, arr[500005], sum[500005];
+map<ll,ll>cnt;
+ll bSrch(ll l)
 {
-    int low = l;
-    int high = n;
-    int mid = (low + high) / 2;
+    ll low = l, high = n-1, mid;
+    mid = (low + high) / 2;
     while (low <= high)
     {
         see3(low, high, mid);
-        if (sum[mid] - sum[l] == sum[l])
+        if (sum[mid] - sum[l - 1] == sum[l - 1])
         {
-            see2(sum[mid] - sum[l], sum[l]);
-            if (sum[n] - sum[mid] == sum[l])
+            see2(sum[mid] - sum[l-1], sum[l-1]);
+            if (sum[n] - sum[mid] == sum[l - 1])
             {
-                see2(sum[n] - sum[mid], sum[l]);
-                return 1;
+                see2(sum[n] - sum[mid], sum[l-1]);
+                return sum[mid];
             }
             else
-            {
                 return 0;
-            }
         }
-        else if (sum[mid] - sum[l] > sum[l])
+        else if (sum[mid] - sum[l - 1] > sum[l - 1])
         {
-            high = mid - 1;
+            high = mid-1;
         }
         else
-            low = mid + 1;
-        mid = (low + high) / 2;
+            low = mid+1;
+        mid=(low + high) / 2;
     }
     return 0;
 }
 int main()
 {
     fio;
-#ifndef ONLINE_JUDGE
-    rw;
-#endif
-    ll ans = 0, firstPart = 0;
+    #ifndef ONLINE_JUDGE
+        rw;
+    #endif
+    ll ans = 0, func=0;
     cin >> n;
     for1(i, n, 1)
     {
         cin >> arr[i];
         sum[i] += sum[i - 1] + arr[i];
-        //cout<<sum[i]<<" ";
+        cnt[sum[i]]++;
     }
-    //cout<<endl<<sum[n]<<endl;
-    if (sum[n] % 3 || n < 3)
+    if(sum[n]%3 || n<3)
     {
-        cout << ans << endl;
+        cout<<"0"<<endl;
         return 0;
     }
-    ll factor = sum[n] / 3;
-    map<ll, ll> mp;
-    //see(factor);
+    // if(!sum[n])
+    // {
+    //     ans = cnt[sum[n]];
+    //     ans -= 2;
+    //     if(ans<=0)
+    //     {
+    //         ans = 0;
+    //     }
+    //     else
+    //     {
+    //         ans = ((ans)*(ans+1))/2;
+    //     }
+    //     cout<<ans<<endl;
+    //     return 0;
+    // }
     for1(i, n - 1, 1)
     {
-        if (sum[i] == factor * 2)
+        if (sum[i]*3==sum[n]*2)
         {
-            //see(i);
-            //mp[sum[i]]++;
-            ans += firstPart;
+            ans+=func;
         }
-        if (sum[i] == factor)
+        if (sum[i] == sum[n] / 3)
         {
-            // if (mp[factor])
-            //     mp[sum[i]]++;
-            firstPart++;
+            func++;
         }
-        // else if (sum[i] == sum[n])
-        // {
-        //     if (mp[factor * 2])
-        //         mp[sum[i]]++;
-        // }
-        // cout << i << endl;
-        // ans += bSrch(i);
     }
-    // if(!mp[sum[n]])
-    // {
-    //     mp[sum[n]]++;
-    // }
-    // //see3(mp[factor],mp[factor*2],mp[sum[n]]);
-    // if (factor)
-    //     ans = mp[factor] * mp[factor * 2] * mp[sum[n]];
-    // else
-    // {
-    //     ans = mp[factor];
-    //     ans--;
-    //     ans=((ans)*(ans+1))/2;
-    //     // if(mp[factor]<2)
-    //     //     ans--;
-    //     // if(mp[factor]==n-1)
-    //     //     ans--;
-    // }
     cout << ans << endl;
     return 0;
 }
