@@ -29,12 +29,58 @@ typedef vector<pii> vpii;
 typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
+map<ll, ll> flag;
+ll n, arr[200005], ans;
+// ll bSrch(ll l)
+// {
+//     ll low = l+1;
+//     ll high = n;
+//     ll mid = (low+high)/2;
+//     while (low<=high)
+//     {
+//         if(arr[mid] == 2*arr[l])
+//         {
+//             ans = mid;
+//             low = mid + 1;
+//         }
+//         else if(arr[mid] > 2*arr[l])
+//         {
+//             high = mid - 1;
+//         }
+//         else
+//         {
+//             ans = mid;
+//             low = mid + 1;
+//         }
+//         mid = (low+high)/2;
+//     }
+//     return ans;
+// }
 int main()
 {
     fio;
-    // #ifndef ONLINE_JUDGE 
-    //     rw;
-    // #endif
-    
+#ifndef ONLINE_JUDGE
+    rw;
+#endif
+    cin >> n;
+    for1(i, n, 1)
+    {
+        cin >> arr[i];
+        //flag[abs(arr[i])]++;
+        if (arr[i] < 0)
+            arr[i] = -arr[i];
+    }
+    sort(arr + 1, arr + n + 1);
+    // map<ll,ll>mp;
+    // for1(i,n,1)
+    // {
+    //     mp[arr[i]]=i;
+    // }
+    for1(i, n, 1)
+    {
+        ans += (upper_bound(arr + 1, arr + 1 + n, 2 * arr[i]) - arr) - i - 1;
+        //see(ans);
+    }
+    cout << ans << endl;
     return 0;
 }

@@ -29,8 +29,7 @@ typedef vector<pii> vpii;
 typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
-vl tmp;
-vpl strngth;
+vl strngth;
 vl adj[300005];
 bool vis[300005];
 bool visb[300005];
@@ -41,6 +40,10 @@ bool sortbydes(const pair<ll,ll> &a,
 {
     return (a.ff > b.ff);
 }
+ll DFS(ll src)
+{
+    for0(i,adj[])
+}
 // ll DFS(ll src, ll mx)
 // {
 //     vis[src]=true;
@@ -48,8 +51,7 @@ bool sortbydes(const pair<ll,ll> &a,
 //     for0(i,adj[src].size(),1)
 //     {
 //         if(vis[adj[src][i]])
-//             continue;
-        
+//             continue;      
 //         if(strngth[adj[src][i]-1]==mx)
 //              mx++;
 //         see3(src, adj[src][i], mx);
@@ -58,49 +60,49 @@ bool sortbydes(const pair<ll,ll> &a,
 //     see2(src, mx);
 //     return mx;
 // }
-void BFS1(ll src)
-{
-    queue<ll>q;
-    q.push(src);
-    ll f;
-    while(!q.empty())
-    {
-        f=q.front();
-        q.pop();
-        vis[f]=true;
-        for0(i,adj[f].size(),1)
-        {
-            if(vis[adj[f][i]])
-                continue;
-            lvl[adj[f][i]]=lvl[f]+1;
-            q.push(adj[f][i]);
-        }
-    }
-}
-ll BFS2(ll src)
-{
-    queue<ll>q;
-    q.push(src);
-    ll f;
-    while(!q.empty())
-    {
-        f=q.front();
-        q.pop();
-        visb[f]=true;
-        for0(i,adj[f].size(),1)
-        {
-            if(visb[adj[f][i]])
-                continue;
-            if(lvl[adj[f][i]]-lvl[f]<=2)
-                tmp[adj[f][i]]++;
-            mx2=max(mx2,tmp[adj[f][i]]);
-            see3(mx2,adj[f][i],tmp[adj[f][i]]);
-            q.push(adj[f][i]);
-        }
-    }
-    see2(mx2,src);
-    return mx2;
-}
+// void BFS1(ll src)
+// {
+//     queue<ll>q;
+//     q.push(src);
+//     ll f;
+//     while(!q.empty())
+//     {
+//         f=q.front();
+//         q.pop();
+//         vis[f]=true;
+//         for0(i,adj[f].size(),1)
+//         {
+//             if(vis[adj[f][i]])
+//                 continue;
+//             lvl[adj[f][i]]=lvl[f]+1;
+//             q.push(adj[f][i]);
+//         }
+//     }
+// }
+// ll BFS2(ll src)
+// {
+//     queue<ll>q;
+//     q.push(src);
+//     ll f;
+//     while(!q.empty())
+//     {
+//         f=q.front();
+//         q.pop();
+//         visb[f]=true;
+//         for0(i,adj[f].size(),1)
+//         {
+//             if(visb[adj[f][i]])
+//                 continue;
+//             if(lvl[adj[f][i]]-lvl[f]<=2)
+//                 tmp[adj[f][i]]++;
+//             mx2=max(mx2,tmp[adj[f][i]]);
+//             see3(mx2,adj[f][i],tmp[adj[f][i]]);
+//             q.push(adj[f][i]);
+//         }
+//     }
+//     see2(mx2,src);
+//     return mx2;
+// }
 int main()
 {
     fio;
@@ -109,16 +111,11 @@ int main()
     // #endif
     ll n,u,v,x,ans=LONG_LONG_MIN,pos=0;
     cin>>n;
+    strngth.pb(-1);
     for0(i,n,1)
     {
         cin>>x;
-        // if(x>mx)
-        // {
-        //     mx=x;
-        //     pos=i+1;
-        // }
-        tmp.pb(x);
-        strngth.pb(mk(x,i+1));
+        strngth.pb(x);
     }
     //ans=mx;
     for0(i,n-1,1)
@@ -127,30 +124,31 @@ int main()
         adj[u].pb(v);
         adj[v].pb(u);
     }
+    DFS(0);
     // for0(i,n,1)
     // {
     //     see2(strngth[i].ff,strngth[i].ss);
     // }
-    sort(all(strngth), sortbydes);
+    // sort(all(strngth), sortbydes);
     // for0(i,n,1)
     // {
     //     see2(strngth[i].ff,strngth[i].ss);
     // }
-    for0(i,n,1)
-    {
-        if(!visb[strngth[i].ss])
-        {
-            BFS1(strngth[i].ss);
-            // for0(j, n, 1)
-            // {
-            //     see2(j+1, lvl[j+1]);
-            // }
-            clr(vis,0);
-            ans=max(ans, BFS2(strngth[i].ss));
-            clr(lvl,0);
-            mx2=LONG_LONG_MIN;
-        }
-    }
+    // for0(i,n,1)
+    // {
+    //     if(!visb[strngth[i].ss])
+    //     {
+    //         BFS1(strngth[i].ss);
+    //         // for0(j, n, 1)
+    //         // {
+    //         //     see2(j+1, lvl[j+1]);
+    //         // }
+    //         clr(vis,0);
+    //         ans=max(ans, BFS2(strngth[i].ss));
+    //         clr(lvl,0);
+    //         mx2=LONG_LONG_MIN;
+    //     }
+    // }
     //see(ans);
     // BFS1(pos);
     // for0(i,n,1)

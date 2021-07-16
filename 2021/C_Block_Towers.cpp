@@ -32,9 +32,38 @@ typedef vector<vl> vvl;
 int main()
 {
     fio;
-    // #ifndef ONLINE_JUDGE 
-    //     rw;
-    // #endif
-    
+    #ifndef ONLINE_JUDGE 
+        rw;
+    #endif
+    ll n, m, minn = 10e8, j, sum = 0, k=0;
+    cin >> n >> m;
+    if (n <= m)
+    {
+        cout << m * 3 << endl;
+    }
+    else
+    {
+        if (m == 1)
+        {
+            cout<<n*2<<endl;
+            return 0;
+        }
+        j = (m * 3) / 6;
+        see(j);
+        forcr(i, m, ((m * 3) / 6), 1)
+        {
+            see2(i, j);
+            ll a = (m * 6 - 3 * i);
+            sum += (3*m*m+1)/2+(k*3);
+            k++;
+            ll b = (n * 2 + (j--) * 2);
+            sum += b+(k*)
+            if(a == b)
+                a+=2,sum+=2;
+            see3(minn, a, b);
+            minn = min(minn, max(a, b));
+        }
+        cout << minn << endl;
+    }
     return 0;
 }
