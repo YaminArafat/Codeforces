@@ -32,9 +32,73 @@ typedef vector<vl> vvl;
 int main()
 {
     fio;
-    // #ifndef ONLINE_JUDGE 
-    //     rw;
-    // #endif
-    
+#ifndef ONLINE_JUDGE
+    rw;
+#endif
+    int n, maxx = -1, k = 0, tmp = 0, cntL = 0, x = 0, one[105] = {0}, zero[105] = {0};
+    cin >> n;
+    int arr[n + 5];
+    for1(i, n, 1)
+    {
+        cin >> arr[i];
+        if(arr[i])
+        {
+            one[i] = one[i-1]+1;
+            zero[i] = zero[i-1];
+        }
+        else
+        {
+            zero[i] = zero[i-1]+1;
+            one[i] = one[i-1];
+        }
+    }
+    forr1(i,n,1)
+    {
+        for1(j,n,1)
+        {
+            maxx = max (maxx, one[i]-one[j]+zero[i]-zero[j]);
+        }
+    }
+    // for (int i = 0; i < n; i++)
+    // {
+    //     if (arr[i])
+    //         cntL++;
+    //     else
+    //     {
+    //         // k = (upper_bound(arr + i, arr + n, 0) - arr);
+    //         x = i;
+    //         while (x < n && !arr[x])
+    //         {
+    //             k++;
+    //             x++;
+    //         }
+    //         // see3(i, k, x);
+    //         i = x - 1;
+    //         tmp = x;
+    //         // k -= i;
+    //         // i = tmp - 1;
+    //         // see2(i,k);
+    //         // if (i + k < n && arr[i + k])
+    //         //     k++;
+    //         k += cntL;
+    //         // see3(i, k, cntL);
+    //         cntL = 0;
+    //         while (tmp < n && arr[tmp])
+    //         {
+    //             k++;
+    //             tmp++;
+    //         }
+    //         // if (i > 0 && arr[i - 1])
+    //         //     k++;
+    //         // see2(k, tmp);
+    //         maxx = max(maxx, k);
+    //         k = 0;
+    //         // i += tmp;
+    //         // k += (upper_bound...);
+    //     }
+    // }
+    if (maxx < 0)
+        maxx = 0;
+    cout << maxx << endl;
     return 0;
 }
