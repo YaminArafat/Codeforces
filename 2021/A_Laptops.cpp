@@ -35,23 +35,23 @@ int main()
 #ifndef ONLINE_JUDGE
     rw;
 #endif
-    ll n, k, div, rem, ans, t;
-    cin >> t;
-    while (t--)
+    int n, a, b;
+    cin >> n;
+    vpii v;
+    for0(i, n, 1)
     {
-        cin >> n >> k;
-        div = k / (n - 1);
-        rem = k % (n - 1);
-        ans = n * div;
-        if (k % (n - 1))
-        {
-            ans += rem;
-        }
-        else
-        {
-            ans--;
-        }
-        cout << ans << endl;
+        cin >> a >> b;
+        v.pb(mk(a, b));
     }
+    sort(all(v));
+    for0(i, n - 1, 1)
+    {
+        if (v[i + 1].ss < v[i].ss)
+        {
+            cout << "Happy Alex" << endl;
+            return 0;
+        }
+    }
+    cout << "Poor Alex" << endl;
     return 0;
 }

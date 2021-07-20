@@ -29,29 +29,37 @@ typedef vector<pii> vpii;
 typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
+ll  arr[550005];
 int main()
 {
     fio;
 #ifndef ONLINE_JUDGE
     rw;
 #endif
-    ll n, k, div, rem, ans, t;
+    ll t, n, qurtr, ans = 0;
+    for (int i = 3; i <= 499999; i += 2)
+    {
+        qurtr = i / 2;
+        arr[i] += arr[i - 2] + (4 * (qurtr * (qurtr * 2 - 1))) + qurtr * 4;
+    }
     cin >> t;
     while (t--)
     {
-        cin >> n >> k;
-        div = k / (n - 1);
-        rem = k % (n - 1);
-        ans = n * div;
-        if (k % (n - 1))
-        {
-            ans += rem;
-        }
-        else
-        {
-            ans--;
-        }
-        cout << ans << endl;
+        cin >> n;
+        // qurtr = n / 2;
+        // ans += (2 * qurtr * (qurtr + 1));
+        // see(qurtr);
+        // while (qurtr)
+        // {
+        //     see2(ans, qurtr);
+        //     ans += (4 * qurtr * (qurtr * 2 - 1));
+        //     see2(ans,qurtr);
+        //     qurtr--;
+        // }
+        // cout << ans << endl;
+        // ans = 0;
+        cout << arr[n] << endl;
     }
+
     return 0;
 }

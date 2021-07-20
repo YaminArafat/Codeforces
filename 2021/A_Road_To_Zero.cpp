@@ -35,23 +35,25 @@ int main()
 #ifndef ONLINE_JUDGE
     rw;
 #endif
-    ll n, k, div, rem, ans, t;
+    ll t, x, y, a, b, ans = 0;
     cin >> t;
     while (t--)
     {
-        cin >> n >> k;
-        div = k / (n - 1);
-        rem = k % (n - 1);
-        ans = n * div;
-        if (k % (n - 1))
+        cin >> x >> y;
+        cin >> a >> b;
+        if (x > y)
         {
-            ans += rem;
+            ans += (x - y) * a;
+            x = y;
         }
-        else
+        else if (y > x)
         {
-            ans--;
+            ans += (y - x) * a;
+            y = x;
         }
+        ans += min(2 * x * a, x * b);
         cout << ans << endl;
+        ans = 0;
     }
     return 0;
 }

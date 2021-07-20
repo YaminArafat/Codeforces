@@ -35,23 +35,59 @@ int main()
 #ifndef ONLINE_JUDGE
     rw;
 #endif
-    ll n, k, div, rem, ans, t;
+    ll t, n, ans = 0, minn = LONG_LONG_MAX, maxx = LONG_LONG_MIN;
     cin >> t;
     while (t--)
     {
-        cin >> n >> k;
-        div = k / (n - 1);
-        rem = k % (n - 1);
-        ans = n * div;
-        if (k % (n - 1))
+        cin >> n;
+        ll arr[n + 5];
+        for0(i, n, 1)
         {
-            ans += rem;
+            cin >> arr[i];
         }
-        else
+        for0(i, n, 1)
         {
-            ans--;
+            if (arr[i] < 0)
+            {
+                // see3(arr[i], minn, maxx);
+                if (-arr[i] < minn)
+                {
+                    minn = -arr[i];
+                }
+                if (maxx != LONG_LONG_MIN)
+                {
+                    ans += maxx;
+                    maxx = LONG_LONG_MIN;
+                }
+                // see3(arr[i], minn, maxx);
+            }
+            else
+            {
+                // see3(arr[i], minn, maxx);
+                if (arr[i] > maxx)
+                {
+                    maxx = arr[i];
+                }
+                if (minn != LONG_LONG_MAX)
+                {
+                    ans -= minn;
+                    minn = LONG_LONG_MAX;
+                }
+                // see3(arr[i], minn, maxx);
+            }
+        }
+        if (minn != LONG_LONG_MAX)
+        {
+            ans -= minn;
+            minn = LONG_LONG_MAX;
+        }
+        if (maxx != LONG_LONG_MIN)
+        {
+            ans += maxx;
+            maxx = LONG_LONG_MIN;
         }
         cout << ans << endl;
+        ans = 0, minn = LONG_LONG_MAX, maxx = LONG_LONG_MIN;
     }
     return 0;
 }
