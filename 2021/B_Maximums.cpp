@@ -35,22 +35,19 @@ int main()
 #ifndef ONLINE_JUDGE
     rw;
 #endif
-    int t, n;
-    cin >> t;
-    while (t--)
+    ll n;
+    cin >> n;
+    ll arrB[n + 5], arrA[n + 5], x = 0;
+    for0(i, n, 1)
     {
-        cin >> n;
-        if (n == 1)
-        {
-            cout << "-1" << endl;
-            continue;
-        }
-        cout << "2";
-        for0(i, n - 1, 1)
-        {
-            cout << "3";
-        }
-        cout << endl;
+        cin >> arrB[i];
+        arrA[i] = x + arrB[i];
+        x = max(x, arrA[i]);
     }
+    for0(i, n, 1)
+    {
+        cout << arrA[i] << " ";
+    }
+    cout << endl;
     return 0;
 }
