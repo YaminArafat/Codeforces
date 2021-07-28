@@ -32,35 +32,41 @@ typedef vector<vl> vvl;
 int main()
 {
     fio;
-    #ifndef ONLINE_JUDGE 
-        rw;
-    #endif
-    ll t, n, k;
-    cin>>t;
-    while(t--)
+#ifndef ONLINE_JUDGE
+    rw;
+#endif
+    int t;
+    cin >> t;
+    while (t--)
     {
-        cin>>n>>k;
-        string s = "bb";
-        for0(i,n-2,1)
+        string sudoko[10];
+        for0(i, 9, 1)
         {
-            s+='a';
+            cin >> sudoko[i];
         }
-        cout<<s<<endl;
-        forr1(i,n-1,1)
+        // for0(i, 9, 1)
+        // {
+        //     sudoko[i][i] = sudoko[i < 8 ? i + 1 : i - 1][i];
+        // }
+        int x = 0, y = 1;
+        for0(i, 9, 1)
         {
-            if(k <= i)
+            sudoko[i][x] = sudoko[i < 8 ? i + 1 : i - 1][x];
+            x += 3;
+            if (x == 9)
             {
-                s[i] = 'b';
-                s[k-i] = 'b';
-                break;
+                x = 1;
             }
-            else
+            else if (x == 10)
             {
-                k -= i;
+                x = 2;
             }
         }
-        reverse(all(s));
-        cout<<s<<endl;
+        for0(i, 9, 1)
+        {
+            cout << sudoko[i] << endl;
+        }
     }
+
     return 0;
 }

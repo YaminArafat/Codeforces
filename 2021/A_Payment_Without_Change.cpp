@@ -32,35 +32,51 @@ typedef vector<vl> vvl;
 int main()
 {
     fio;
-    #ifndef ONLINE_JUDGE 
-        rw;
-    #endif
-    ll t, n, k;
-    cin>>t;
-    while(t--)
+#ifndef ONLINE_JUDGE
+    rw;
+#endif
+    int q, a, b, n, s;
+    cin >> q;
+    while (q--)
     {
-        cin>>n>>k;
-        string s = "bb";
-        for0(i,n-2,1)
+        cin >> a >> b >> n >> s;
+        if (n * a == s || b == s)
         {
-            s+='a';
+            cout << "YES" << endl;
         }
-        cout<<s<<endl;
-        forr1(i,n-1,1)
+        else
         {
-            if(k <= i)
+            bool process1 = false, process2 = false;
+            int aDiv, aMod, bDiv, bMod;
+            aDiv = s / n;
+            aMod = s % n;
+            // see2(aDiv, aMod);
+            if (a >= aDiv)
             {
-                s[i] = 'b';
-                s[k-i] = 'b';
-                break;
+                if (b >= aMod)
+                {
+                    process1 = true;
+                }
             }
             else
             {
-                k -= i;
+                if (b >= (s - (n * a)))
+                {
+                    process1 = true;
+                }
             }
+            // if ((n * a) >= (s - b))
+            // {
+            //     process2 = true;
+            // }
+            if (process1)
+            {
+                // see2(process1, process2);
+                cout << "YES" << endl;
+            }
+            else
+                cout << "NO" << endl;
         }
-        reverse(all(s));
-        cout<<s<<endl;
     }
     return 0;
 }

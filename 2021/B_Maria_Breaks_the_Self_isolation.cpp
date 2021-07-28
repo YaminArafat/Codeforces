@@ -32,35 +32,45 @@ typedef vector<vl> vvl;
 int main()
 {
     fio;
-    #ifndef ONLINE_JUDGE 
-        rw;
-    #endif
-    ll t, n, k;
-    cin>>t;
-    while(t--)
+#ifndef ONLINE_JUDGE
+    rw;
+#endif
+    int t, n;
+    cin >> t;
+    while (t--)
     {
-        cin>>n>>k;
-        string s = "bb";
-        for0(i,n-2,1)
+        cin >> n;
+        int arr[n + 5];
+        for0(i, n, 1)
         {
-            s+='a';
+            cin >> arr[i];
         }
-        cout<<s<<endl;
-        forr1(i,n-1,1)
+        sort(arr, arr + n);
+        int sum = 1, cnt = 0;
+        // for0(i, n, 1)
+        // {
+        //     if (arr[i] <= sum)
+        //     {
+        //         cnt = i+1;
+        //         sum++;
+        //     }
+        //     else
+        //     {
+        //         sum = arr[i];
+        //         i--;
+        //     }
+        // }
+        forr0(i, n, 1)
         {
-            if(k <= i)
+            if (arr[i] <= i + 1)
             {
-                s[i] = 'b';
-                s[k-i] = 'b';
+                cout << i + 2 << endl;
+                cnt = 1;
                 break;
             }
-            else
-            {
-                k -= i;
-            }
         }
-        reverse(all(s));
-        cout<<s<<endl;
+        if (!cnt)
+            cout << sum << endl;
     }
     return 0;
 }

@@ -32,35 +32,67 @@ typedef vector<vl> vvl;
 int main()
 {
     fio;
-    #ifndef ONLINE_JUDGE 
-        rw;
-    #endif
-    ll t, n, k;
-    cin>>t;
-    while(t--)
+#ifndef ONLINE_JUDGE
+    rw;
+#endif
+    int t, a, b, aDiv = 0, aMod, bDiv = 0, bMod, fDiv = 0;
+    cin >> t;
+    while (t--)
     {
-        cin>>n>>k;
-        string s = "bb";
-        for0(i,n-2,1)
+        cin >> a >> b;
+        aDiv = 0, aMod, bDiv = 0, bMod, fDiv = 0;
+        if (a < b)
         {
-            s+='a';
+            swap(a, b);
         }
-        cout<<s<<endl;
-        forr1(i,n-1,1)
+        if (a >= 2 * b)
         {
-            if(k <= i)
-            {
-                s[i] = 'b';
-                s[k-i] = 'b';
-                break;
-            }
-            else
-            {
-                k -= i;
-            }
+            cout << b << endl;
         }
-        reverse(all(s));
-        cout<<s<<endl;
+        // boro = (a / 2);
+        // mod = a % 2;
+        // taken = min(boro, b);
+        // baki = b - taken;
+        // if (baki > 1 && mod)
+        // {
+        //     taken++;
+        // }
+        else if (a && b)
+        {
+            // int mn = min(a, b);
+            // int mx = max(a, b);
+            // aDiv = mn / 3;
+            // bDiv = aDiv;
+            // aMod = mn % 3;
+            // // mn = min()
+            // bMod = (mx-mn);
+            // fDiv = (aMod + bMod) / 3;
+            // if (fDiv)
+            //     fDiv = 1;
+            int process1, process2;
+            bDiv = b / 3;
+            aDiv = a / 3;
+            aMod = a % 3;
+            bMod = b % 3;
+            if ((aMod + bMod) > 2)
+            {
+                fDiv = 1;
+            }
+            process1 = aDiv + bDiv + fDiv;
+            fDiv = 0;
+            aDiv = a / 2;
+            aMod = a % 2;
+            bDiv = min(b, aDiv);
+            bMod = b - bDiv;
+            if ((aMod + bMod) > 2)
+            {
+                fDiv = 1;
+            }
+            process2 = bDiv + fDiv;
+            cout << max(process1, process2) << endl;
+        }
+        else
+            cout << "0" << endl;
     }
     return 0;
 }

@@ -32,35 +32,38 @@ typedef vector<vl> vvl;
 int main()
 {
     fio;
-    #ifndef ONLINE_JUDGE 
-        rw;
-    #endif
-    ll t, n, k;
-    cin>>t;
-    while(t--)
+#ifndef ONLINE_JUDGE
+    rw;
+#endif
+    int t, n, m;
+    cin >> t;
+    while (t--)
     {
-        cin>>n>>k;
-        string s = "bb";
-        for0(i,n-2,1)
+        cin >> n >> m;
+        string s[n + 2];
+        for0(i, n, 1)
         {
-            s+='a';
-        }
-        cout<<s<<endl;
-        forr1(i,n-1,1)
-        {
-            if(k <= i)
+            for0(j, m, 1)
             {
-                s[i] = 'b';
-                s[k-i] = 'b';
-                break;
-            }
-            else
-            {
-                k -= i;
+                s[i] += 'B';
             }
         }
-        reverse(all(s));
-        cout<<s<<endl;
+        // for0(i,n-1,2)
+        // {
+        //     for0(j,m,1)
+        //     {
+        //         s[i][j]='B';
+        //     }
+        // }
+        // for0(j,m,2)
+        // {
+        //     s[n-1][j]='B';
+        // }
+        s[n - 1][m - 1] = 'W';
+        for0(i, n, 1)
+        {
+            cout << s[i] << endl;
+        }
     }
     return 0;
 }
