@@ -29,37 +29,45 @@ typedef vector<pii> vpii;
 typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
+int arr[5001][3];
 int main()
 {
     fio;
 #ifndef ONLINE_JUDGE
     rw;
 #endif
-    int t, n, k;
+    int t, n;
     cin >> t;
     while (t--)
     {
-        cin >> n >> k;
-        int arr[n + 5];
-        int maxx = INT_MIN;
-        vpii v, v2;
+        cin >> n;
+        int in[n + 5];
+        int f = 0;
         for0(i, n, 1)
         {
-            cin >> arr[i];
-            v.pb(mk(arr[i], i + 1));
-            v2.pb(mk(i + 1, arr[i]));
+            cin >> in[i];
+            if (!arr[in[i]][0])
+            {
+                arr[in[i]][0] = i + 1;
+            }
+            else
+            {
+                arr[in[i]][1] = i + 1;
+            }
         }
-        sort(all(v));
-        sort(all(v2));
-        for0(i, v.size() - 1, 1)
+        for0(i, n, 1)
         {
-            maxx = max(maxx, v[i].ss * v[i + 1].ss - k * (v[i].ff | v[i + 1].ff));
+            // see3(in[i], arr[in[i]][0], arr[in[i]][1]);
+            if (arr[in[i]][0] + 1 < arr[in[i]][1])
+            {
+                cout << "YES" << endl;
+                f = 1;
+                break;
+            }
         }
-        for0(i, v2.size() - 1, 1)
-        {
-            maxx = max(maxx, v2[i].ff * v2[i + 1].ff - k * (v2[i].ss | v2[i + 1].ss));
-        }
-        cout << maxx << endl;
+        if (!f)
+            cout << "NO" << endl;
+        clr(arr, 0);
     }
     return 0;
 }

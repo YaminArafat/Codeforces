@@ -35,31 +35,32 @@ int main()
 #ifndef ONLINE_JUDGE
     rw;
 #endif
-    int t, n, k;
+    ll t, n;
     cin >> t;
     while (t--)
     {
-        cin >> n >> k;
-        int arr[n + 5];
-        int maxx = INT_MIN;
-        vpii v, v2;
+        cin >> n;
+        ll arr[n + 5];
+        ll mx = -1, mn = LONG_LONG_MAX, maxx = -1;
         for0(i, n, 1)
         {
             cin >> arr[i];
-            v.pb(mk(arr[i], i + 1));
-            v2.pb(mk(i + 1, arr[i]));
         }
-        sort(all(v));
-        sort(all(v2));
-        for0(i, v.size() - 1, 1)
+        for0(i, n, 1)
         {
-            maxx = max(maxx, v[i].ss * v[i + 1].ss - k * (v[i].ff | v[i + 1].ff));
+            if (i > 0 && i < n - 1)
+            {
+                // see3(mx, arr[i], arr[i-1]);
+                // see(arr[i+1]);
+                mx = max(mx, arr[i] * arr[i - 1]);
+                mx = max(mx, arr[i] * arr[i + 1]);
+            }
+            else if (i == 0)
+                mx = max(mx, arr[i] * arr[i + 1]);
+            else if (i == n - 1)
+                mx = max(mx, arr[i] * arr[i - 1]);
         }
-        for0(i, v2.size() - 1, 1)
-        {
-            maxx = max(maxx, v2[i].ff * v2[i + 1].ff - k * (v2[i].ss | v2[i + 1].ss));
-        }
-        cout << maxx << endl;
+        cout << mx << endl;
     }
     return 0;
 }

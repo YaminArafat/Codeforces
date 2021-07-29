@@ -32,27 +32,31 @@ typedef vector<vl> vvl;
 int main()
 {
     fio;
-    #ifndef ONLINE_JUDGE 
-        rw;
-    #endif
-    int t, n, o = 0, c = 0, ans = 0;
+#ifndef ONLINE_JUDGE
+    rw;
+#endif
+    int t, n;
     cin >> t;
-    string s;
-    while(t--)
+    char ch[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    while (t--)
     {
-        cin>>n;
-        cin>>s;
-        for0(i, s.size(), 1)
+        cin >> n;
+        string s = "";
+        int x = 0;
+        for1(i, n, 1)
         {
-            if(s[i] == '(')
-                o++;
+            if (i + x <= n)
+                s += ch[(i - 1) % 26] + s.substr((i - 1) % 26, x), i+= x;
             else
-                c++;
-            if(c > o)
-                ans++, c = 0, o = 0;
+            {
+                s += ch[(i % 26) - 1];
+            }
+            if (i % 26 == 0)
+            {
+                x++;
+            }
         }
-        cout << ans << endl;
-        ans = c = o = 0;
+        cout << s << endl;
     }
     return 0;
 }
