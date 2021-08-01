@@ -35,65 +35,54 @@ int main()
 #ifndef ONLINE_JUDGE
     rw;
 #endif
-    ll t, n;
+    int t, n;
     cin >> t;
     while (t--)
     {
         cin >> n;
-        if (n <= 6)
+        int arr[n + 5], maxx = INT_MIN, ans, team = 0;
+        for0(i, n, 1)
         {
-            cout << "15" << endl;
+            cin >> arr[i];
         }
-        // else if (n % 6 == 0)
-        // {
-        //     cout << (n / 6) * 15 * 1LL << endl;
-        // }
-        // else if (n % 8 == 0)
-        // {
-        //     cout << (n / 8) * 20 * 1LL << endl;
-        // }
-        // else if (n % 10 == 0)
-        // {
-        //     cout << (n / 10) * 25 * 1LL << endl;
-        // }
-        else
+        // sort(arr, arr + n);
+        map<int, int> mp;
+        bool vis[n * 2];
+        for0(i, n - 1, 1)
         {
-            ll small, medium, large, mn, modS, modM, modL;
-            // small = n / 6;
-            // medium = n / 8;
-            // large = n / 10;
-            // modS = n % 6;
-            // modM = n % 8;
-            // modL = n % 10;
-            // //see3(modS,modM,modL);
-            // small = small * 15;
-            // if (modS)
-            //     small += 15;
-            // medium = medium * 20;
-            // if (modM)
-            // {
-            //     if (modM <= 6)
-            //         medium += 15;
-            //     else
-            //         medium += 20;
-            // }
-            // large = large * 25;
-            // if (modL)
-            // {
-            //     if (modL <= 6)
-            //         large += 15;
-            //     else if (modL <= 8)
-            //         large += 20;
-            //     else
-            //         large += 25;
-            // }
-            // mn = min(small, min(medium, large));
-            // long double nn = n;
-            n += n % 2;
-            n *= 2.5;
-            mn = (ll)n;
-            cout << mn << endl;
+            clr(vis, false);
+            forc(j, i + 1, n - 1, 1)
+            {
+                if (!vis[arr[j]])
+                    mp[arr[i] + arr[j]]++, vis[arr[j]] = true;
+            }
         }
+        tr(it, mp)
+        {
+             see2(it->ff, it->ss);
+            if (it->ss > maxx)
+            {
+                maxx = it->ss;
+                ans = it->ff;
+            }
+        }
+        bool mark[n * n * 2];
+        clr(mark, false);
+        for0(i, n - 1, 1)
+        {
+            if (mark[i])
+                continue;
+            forc(j, i + 1, n - 1, 1)
+            {
+                if (!mark[j] && arr[i] + arr[j] == ans)
+                {
+                    mark[j] = true;
+                    team++;
+                    break;
+                }
+            }
+        }
+        cout << team << endl;
     }
     return 0;
 }

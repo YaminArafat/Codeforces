@@ -35,65 +35,52 @@ int main()
 #ifndef ONLINE_JUDGE
     rw;
 #endif
-    ll t, n;
+    ll t, W, H, x1, y1, x2, y2, w, h;
     cin >> t;
     while (t--)
     {
-        cin >> n;
-        if (n <= 6)
+        cin >> W >> H;
+        cin >> x1 >> y1 >> x2 >> y2;
+        cin >> w >> h;
+        long double ans;
+        if ((w <= x1 && h <= H) || (w <= (W - x2) && h <= H) || (w <= W && h <= y1) || (w <= W && h <= (H - y2)))
         {
-            cout << "15" << endl;
+            ans = 0;
         }
-        // else if (n % 6 == 0)
-        // {
-        //     cout << (n / 6) * 15 * 1LL << endl;
-        // }
-        // else if (n % 8 == 0)
-        // {
-        //     cout << (n / 8) * 20 * 1LL << endl;
-        // }
-        // else if (n % 10 == 0)
-        // {
-        //     cout << (n / 10) * 25 * 1LL << endl;
-        // }
+        else if ((w + (x2 - x1) > W) && (h + (y2 - y1) > H))
+        {
+            ans = -1;
+        }
         else
         {
-            ll small, medium, large, mn, modS, modM, modL;
-            // small = n / 6;
-            // medium = n / 8;
-            // large = n / 10;
-            // modS = n % 6;
-            // modM = n % 8;
-            // modL = n % 10;
-            // //see3(modS,modM,modL);
-            // small = small * 15;
-            // if (modS)
-            //     small += 15;
-            // medium = medium * 20;
-            // if (modM)
-            // {
-            //     if (modM <= 6)
-            //         medium += 15;
-            //     else
-            //         medium += 20;
-            // }
-            // large = large * 25;
-            // if (modL)
-            // {
-            //     if (modL <= 6)
-            //         large += 15;
-            //     else if (modL <= 8)
-            //         large += 20;
-            //     else
-            //         large += 25;
-            // }
-            // mn = min(small, min(medium, large));
-            // long double nn = n;
-            n += n % 2;
-            n *= 2.5;
-            mn = (ll)n;
-            cout << mn << endl;
+            long double p1w = 10000000000.0, p2w = 10000000000.0, p3h = 10000000000.0, p4h = 10000000000.0, gap;
+            {
+                gap = x1;
+                gap = w - gap;
+                if (gap + x2 <= W)
+                    p1w = gap;
+            }
+            {
+                gap = W - x2;
+                gap = w - gap;
+                if (x1 - gap >= 0)
+                    p2w = gap;
+            }
+            {
+                gap = y1;
+                gap = h - gap;
+                if (gap + y2 <= H)
+                    p3h = gap;
+            }
+            {
+                gap = H - y2;
+                gap = h - gap;
+                if (y1 - gap >= 0)
+                    p4h = gap;
+            }
+            ans = min(p1w, min(p2w, min(p3h, p4h)));
         }
+        cout << fixed << setprecision(10) << ans << endl;
     }
     return 0;
 }
