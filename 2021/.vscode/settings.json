@@ -1,11 +1,10 @@
 {
-    "C_Cpp.errorSquiggles": "Enabled",
     "files.associations": {
-        "iosfwd": "cpp",
-        "ostream": "cpp",
         "iostream": "cpp",
-        "cmath": "cpp",
-        "complex": "cpp",
-        "cstdlib": "cpp"
+        "*.tcc": "cpp",
+        "chrono": "cpp",
+        "random": "cpp",
+        "limits": "cpp",
+        "valarray": "cpp"
     }
 }
